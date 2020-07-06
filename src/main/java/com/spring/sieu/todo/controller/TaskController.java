@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,8 @@ import com.spring.sieu.todo.model.Task;
 import com.spring.sieu.todo.service.Implement.TaskServiceImplement;
 
 @RestController
-@RequestMapping(path = "/free", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/free")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskController {
 	@Autowired
 	private TaskServiceImplement service;
@@ -25,7 +27,7 @@ public class TaskController {
 		return service.getTasksByAccountId(accountId);
 	}
 	
-	@PostMapping(value = "/addTaskByAccount", consumes = {"text/plain", "application/*"}, produces = "text/plain")
+	@PostMapping(value = "/addTaskByAccount")
 	public String addTaskByAccount(@RequestBody Task task) {
 		String msg = "";
 		if (task != null) {

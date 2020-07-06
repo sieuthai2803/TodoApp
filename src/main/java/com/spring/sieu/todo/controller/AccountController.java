@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +18,7 @@ import com.spring.sieu.todo.service.Implement.AccountServiceImplement;
 
 @RestController
 @RequestMapping(path = "/free")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AccountController {
 	@Autowired
 	private AccountServiceImplement service;
@@ -31,7 +34,7 @@ public class AccountController {
 		return listRS;
 	}
 
-	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)  //1
+	@PostMapping(value = "/sign-up")
 	public String registerNewAccount(@RequestBody Account account) {
 		String msg = "";
 		boolean isCreated = service.createNewAccount(account.getUsername(), account.getPassword());
